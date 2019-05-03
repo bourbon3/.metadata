@@ -1,5 +1,4 @@
-// PROGRAM TO IMPLEMENT HASH TABLE USING LINEAR PROBING WITH AND WITHOUT REPLACEMENT
-// OPTIONS : INSERT AND DISPLAY
+
 #include<iostream>
 #include<stdlib.h>
 #include<string.h>
@@ -30,39 +29,39 @@ void hashtable::initialize() {
 	for(i = 0; i < MAX; i++ ){
 		rec[i].id = -1;      strcpy( rec[i].name, "-" );
 	}
-}// End of initialize()
+}
 
 int hashtable::hashing( int no ) {
 	int key;
-	key = no % MAX;      //calculating key
+	key = no % MAX;      
 	return( key );
-}// End of hashing
+}
 
 void hashtable::woreplace( struct hash h ) {
 	int i,k,z;            	
-	k = hashing( h.id );    // Calculating key using hash function
+	k = hashing( h.id );   
 
 	if( rec[k].id == -1 ) {
 		rec[k].id = h.id;
 		strcpy( rec[k].name, h.name );
 	}
-	else  // SEARCH LINEARLY DOWN FOR EMPTY SLOT
+	else  
 		place_at_next_slot(k,h);
-}//End of Without Replacement
+}
 
 void hashtable::place_at_next_slot( int k, struct hash h )
-{ // SEARCH LINEARLY DOWN FOR EMPTY SLOT
+{ 
 	int i, z;
 	for(i = 1; i < MAX; i++ ){
-		z = (k+i)%MAX;  // (hash(key) + i)%M
+		z = (k+i)%MAX; 
 		if( rec[z].id == -1 ){
 			rec[z].id = h.id;
 			strcpy( rec[z].name, h.name );
 			break;
-		}//if
-	}//for
+		}
+	}
 
-}//place at next_slot
+}
 
 void hashtable::display() {
 	cout<<"\n Collision Handling :\n\t----------------------------------";
@@ -73,43 +72,43 @@ void hashtable::display() {
 		cout<<"\n";
 	}
 	cout<<"\n\t----------------------------------\n";
-}//display
+}
 
 void hashtable::wreplace( struct hash h )
 {
-	int k,p,change_pos;    // Storing key and position for chain table
+	int k,p,change_pos;    
 
-	k = hashing( h.id );    // Calculating key using hash function
+	k = hashing( h.id );   
 
 	if( rec[k].id == -1 )
 	{
 		rec[k].id = h.id;
 		strcpy( rec[k].name, h.name );
 	}
-	else if( hashing(rec[k].id) == hashing(h.id) )//VALUE IS AT APPROPRIATE POSITION
+	else if( hashing(rec[k].id) == hashing(h.id) )
 		place_at_next_slot(k,h);
-	else // HASH VALUE IS NOT AT APPROPRIATE POSITION
+	else
 	{
 		tmp.id = rec[k].id;
 		strcpy( tmp.name, rec[k].name );
 
-		rec[k].id = h.id;    // COPY NEW RECORD AT ITS PROPER POSITION
+		rec[k].id = h.id;   
 		strcpy(rec[k].name, h.name);
 
-		place_at_next_slot(k,tmp);  // RE-store existing record at next EMPTY SLOT
+		place_at_next_slot(k,tmp);  
 		
-	}// End of else
-}//End of With Replacement
+	}
+}
 
 void hashtable::search( int key )
 {
 	int i,k,z;            	
 	int flag = 0;
-	k = hashing( key );    // Calculating key using hash function
+	k = hashing( key );    
 
 	if( rec[k].id == key )
 		cout << "\n Key " << key << " found at home address !!";
-	else  		// SEARCH LINEARLY DOWN FOR EMPTY SLOT
+	else  		
 	{
 		for(z = 1; z < MAX; z++ ){
 			i = (k+z)%MAX;
@@ -118,11 +117,11 @@ void hashtable::search( int key )
 				flag=1;
 				break;
 			}
-		}//end of for
+		}
 		if (flag==0)
 			cout << "\n Key " << key << " not present in the table";
 	}
-}//End of search
+}
 
 
 
@@ -170,10 +169,10 @@ int main(){
                                	h.search(key);
 				break;
 			case 5:  exit(0);
-		}// End of switch()*/
+		}
 	}while( ch != 5 );
 return 0;	
-}//End of program
+}
 
 
 
