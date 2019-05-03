@@ -1,27 +1,23 @@
-/*
-A Dictionary stores keywords & its meanings. Provide facility for adding new keywords, deleting keywords, updating values of any entry. Provide facility to display whole data sorted in ascending/ Descending order. Also find how many maximum comparisons may require for finding any keyword. Use Binary Search Tree for implementation.
-*/
-
 #include <iostream>
 #include<string.h>
 using namespace std;
 
 struct node{
-	char k[20]; //key
-	char m[20]; //meaning
+	char k[20]; 
+	char m[20]; 
 	node *lc, *rc;
 }*root;
 
 class DictionaryBST{
 	public:
-		DictionaryBST() //constructor 
+		DictionaryBST() 
 		{
 			root=0;
 		}
 		void create();
-		int search(char *); //calculate number of comparisons
-		void display(node*); //indorder for asc
-		void display_rev(node*);//reverse inorder for desc
+		int search(char *); 
+		void display(node*); 
+		void display_rev(node*);
 		int update(char *);
 		void del(char *);
 		node * del(node *,char *);
@@ -88,10 +84,10 @@ int main()
 		cin>>a;
 	} while(a=='y');
 	return 0;
-}//end of main
+}
 
 
-void DictionaryBST :: display(node *n)//Ascending order display
+void DictionaryBST :: display(node *n)
 {
     if(n!=0)
     {
@@ -102,7 +98,7 @@ void DictionaryBST :: display(node *n)//Ascending order display
     }
 }
 
-void DictionaryBST :: display_rev(node *n) //desc order (reverse inorder)
+void DictionaryBST :: display_rev(node *n)
 {
     if(n!=0)
     {
@@ -116,7 +112,7 @@ void DictionaryBST :: display_rev(node *n) //desc order (reverse inorder)
 
 void DictionaryBST :: create()
 {
-	node *temp=0, *r=0; //temp storing node to be added; r is reprenting root
+	node *temp=0, *r=0; 
 	char ch='y';
 	while(ch=='y')
 	{
@@ -128,23 +124,23 @@ void DictionaryBST :: create()
 		cin>>temp->m;
 		temp->lc = temp->rc = 0;
 
-		//Locate the position for temp
+		
 		if(root == 0)
-			root = temp; //set new node as root
+			root = temp; 
 		else{
 			r=root;
 			while(1)
 			{
-				if(strcmp(temp->k,r->k)<0)// new key is less than root
+				if(strcmp(temp->k,r->k)<0)
 				{					
-					if(r->lc==0) //empty subtree
+					if(r->lc==0) 
 					{
-						r->lc = temp; //add new key
-						break; //inner while - for traversing the levels
+						r->lc = temp; 
+						break; 
 					}
 					else
 						r=r->lc; 				
-				}//end of check in left subtree
+				}
 
 				else if(strcmp(temp->k,r->k)>0)
 				{
@@ -155,23 +151,22 @@ void DictionaryBST :: create()
 					else
 						r = r->rc;				
 				}
-			}//inner while(1)
-		}//else
-
+			}
+		}
 		cout<<"Want to add more items(y/n)";
 		cin>>ch;
-    }//outer while
-}//create 
+    }
+}
 
 int DictionaryBST::search(char *temp)
 {
 	node *r;
 	r=root;
-	int c=0; //count
+	int c=0;
 	while(r != 0)
 	{
 		c++;
-		if(strcmp (temp,r->k) == 0) //Key found
+		if(strcmp (temp,r->k) == 0) 
 		{
 			cout<<"\n No of Comparisons:"<<c;
 			return 1;
@@ -180,9 +175,9 @@ int DictionaryBST::search(char *temp)
 			r = r->lc;
 		else if (strcmp (temp, r->k) > 0)
 			r = r->rc;
-	}//while
-	return -1;  //unsuccessful search
-}//search
+	}
+	return -1; 
+}
 
 
 int DictionaryBST :: update(char *temp)
@@ -192,7 +187,7 @@ int DictionaryBST :: update(char *temp)
 
 	while(r != 0)
 	{
-		if(strcmp (temp,r->k) == 0)//Key found for update
+		if(strcmp (temp,r->k) == 0)
 		{
 			cout<<"\nEnter New Meaning of Keyword "<< r->k;
 			cout <<" : ";
@@ -203,9 +198,9 @@ int DictionaryBST :: update(char *temp)
 			r = r->lc;
 		if(strcmp (temp, r->k) > 0)
 			r = r->rc;
-	}//while
-	return -1;  //unsuccessful search
-}//update
+	}
+	return -1;  
+}
 
 node* DictionaryBST :: del(node * r,char temp[20])
 {
@@ -217,33 +212,33 @@ node* DictionaryBST :: del(node * r,char temp[20])
 		return r;
 	}
 
-	if (strcmp(temp,r->k) < 0) //node to be deleted is less than root
+	if (strcmp(temp,r->k) < 0) 
 	{
-		r->lc = del(r->lc, temp); //recursive call to del with left child
+		r->lc = del(r->lc, temp); 
 		return r;
 	}
-	if (strcmp(temp,r->k) > 0)//node to be deleted is greater than root
+	if (strcmp(temp,r->k) > 0)
 	{
-		r->rc = del(r->rc, temp);//recursive call to del with right child
+		r->rc = del(r->rc, temp);
 		return r;
 	}
 	
-	//code after finding the node to be deleted
-	if (r->lc==0 && r->rc==0) // node is leaf node
+	
+	if (r->lc==0 && r->rc==0)
 	{
 		t = r;
 		delete t;
-		return 0;  //bcoz r is a leaf node
+		return 0;  
 	}
 
-	if(r->rc==0) //node to be deleted has only left child
+	if(r->rc==0) 
 	{
 		t = r;
 		r = r->lc;
 		delete t;
 		return r;
 	}
-	else if(r->lc==0)  //node to be deleted has only right child
+	else if(r->lc==0) 
 	{
 		t = r;
 		r = r->rc;
@@ -251,14 +246,14 @@ node* DictionaryBST :: del(node * r,char temp[20])
 		return r;
 	}
 
-	//If not the above cases; node to be deleted has two children
-	t = min(r->rc); //Find minimum value from right subtree
-	strcpy(r->k,t->k); //Replace 
+	
+	t = min(r->rc); 
+	strcpy(r->k,t->k); 
 	r->rc = del(r->rc, t->k);
 	return r;
 }
 
-node * DictionaryBST :: min(node *q)//minimum node
+node * DictionaryBST :: min(node *q)
 {
 	while(q->lc != 0)
 	{
