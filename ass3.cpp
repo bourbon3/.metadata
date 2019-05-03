@@ -1,6 +1,4 @@
-/*
-Create Binary Search tree and find its mirror image. Print original & new tree level wise. Find height & print leaf nodes
-*/
+
 
 #include<iostream>
 
@@ -21,8 +19,8 @@ class bstMirror
 			root=NULL;
 		}
 
-	bstNode* createNode(int); //Node creation
-	bstNode* insert(bstNode*,int);  //Adding the node level wise
+	bstNode* createNode(int); 
+	bstNode* insert(bstNode*,int); 
 	void inorder(bstNode*); 
 	void inorder_leaf(bstNode*); 
 
@@ -41,7 +39,7 @@ bstNode* bstMirror::createNode(int data)
 	tmpNode->data = data;
 
 	return tmpNode;
-}//createNode
+}/
 
 bstNode* bstMirror::insert(bstNode* root,int data) 
 {
@@ -56,7 +54,7 @@ bstNode* bstMirror::insert(bstNode* root,int data)
 		root->right = insert(root->right,data);
 	}
 	return root;
-}//insert node
+}
 
 void bstMirror::inorder(bstNode *temp)
 {
@@ -66,18 +64,18 @@ void bstMirror::inorder(bstNode *temp)
 		cout<<temp->data<<"  ";
 		inorder(temp->right);        
 	}
-}//inorder
+}
 
 void bstMirror::inorder_leaf(bstNode *temp)
 {
 	if (temp != NULL)
 	{
 		inorder_leaf(temp->left);
-		if(temp->left==NULL && temp->right==NULL)  //temp is a leaf node
+		if(temp->left==NULL && temp->right==NULL)  
 			cout<<temp->data<<"  ";
 		inorder_leaf(temp->right);        
 	}
-}//inorder for printing leaf node
+}
 
 int bstMirror::height(bstNode *temp)
 {
@@ -92,9 +90,9 @@ int bstMirror::height(bstNode *temp)
 		return max(lt, rt) + 1;
 	}
 	
-}//height
+}
 
-void bstMirror::mirror(bstNode *node)  //same as postorder
+void bstMirror::mirror(bstNode *node) 
 { 
 	if (node==NULL)  
 		return;   
@@ -108,7 +106,7 @@ void bstMirror::mirror(bstNode *node)  //same as postorder
 		node->left  = node->right; 
 		node->right = temp; 
 	} 
-}//mirror  
+}
 
 void bstMirror::printLevel(bstNode *root, int level)
 {
@@ -124,7 +122,7 @@ void bstMirror::printLevel(bstNode *root, int level)
 		printLevel(root->left,level-1);
 		printLevel(root->right,level-1);
 	}
-}//printLevel
+}
 
 
 void bstMirror::level(bstNode *root)
@@ -133,7 +131,7 @@ void bstMirror::level(bstNode *root)
 
 	for(int i=1;i<=h;i++)
 		printLevel(root,i);
-}//level
+}
 
 int main() 
 {
