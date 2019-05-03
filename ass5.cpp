@@ -1,7 +1,3 @@
-// ==============
-// BFS & DFS
-// ==============
-
 #include <iostream>
 #define MAX 20
 using namespace std;
@@ -34,7 +30,7 @@ class stack
 		int isEmpty();
 		int isFull();
 		void push(int);
-};//Stack declaration
+};
 
 class queue
 {
@@ -49,9 +45,9 @@ class queue
 		int isEmpty();
 		int isFull();
 		void push(int);
-};//Queue declaration
+};
 
-/*---- Stack definitions starts here ----*/	
+	
 int stack::pop()
 {
 	int x;
@@ -63,12 +59,12 @@ int stack::pop()
 		top--;
 	}
 	return x;
-}//pop
+}
 
 int stack:: isEmpty()
 { 
 	if(top==-1) return 1; else return 0;
-}//isEmpty
+}
 
 int stack:: isFull()
 {
@@ -85,9 +81,7 @@ void stack:: push(int x)
 		item[top] = x;
 	}
 }
-/*---- Stack definitions ends here ----*/	
 
-/*---- Queue definitions starts here ----*/	
 	int queue:: pop()
 	{
 		int x;
@@ -126,8 +120,7 @@ void stack:: push(int x)
 			front++;
 			item[++rear] = x;
 		}
-	}
-/*---- Queue definitions ends here ----*/	
+	}	
 
 
 graph :: graph()
@@ -146,16 +139,16 @@ void graph :: create()
 	cout<<"No. of Vertices in a graph ::  ";
 	cin>>n;
 
-	for (int i = 0; i< n-1; i++)//Vertices/Nodes
+	for (int i = 0; i< n-1; i++)
 	 {
-		for(int j = i+1; j < n; j++)//Adjacency nodes
+		for(int j = i+1; j < n; j++)
 		{
 			cout<<"Does edge is present between "<< i <<" and " <<j<<"?(1/0)- ";
 			cin >> ch;
 			if(ch==1) adj[i][j] = adj[j][i] = 1;
-		}//inner for -j
-	}//outer for - i
-}//create
+		}
+	}
+}
 
 
 void graph :: dfs()
@@ -166,26 +159,26 @@ void graph :: dfs()
 	cout<<"Enter starting vertex :: ";
 	cin >> i;
 
-	s.push(i);//push starting vertex into stack
+	s.push(i);
 
-	while(!s.isEmpty()) //Till stack is not empty
+	while(!s.isEmpty())
 	{
-		i = s.pop(); //Pop the vertex
+		i = s.pop();
 
-		if(visited[i]==1) //ignore if the vertex is visited
+		if(visited[i]==1) 
 			continue;
 
-		cout<<" "<<i; //print the vertex
+		cout<<" "<<i;
 
-		visited[i] = 1;   //set it as visited
+		visited[i] = 1;  
 
-		for (int k = 0; k < n; k++) //for accessing adjacent elements of i
+		for (int k = 0; k < n; k++) 
 		{
-			if(adj[i][k] == 1 && visited[k] == 0) //if edge is present and new vertex is not visited
+			if(adj[i][k] == 1 && visited[k] == 0) 
 				s.push(k);
-		}//for
-	}//while	
-}//dfs
+		}
+	}	
+}
 
 void graph :: initialize_visited()
 {
@@ -202,26 +195,26 @@ void graph :: bfs()
 	cout<<"Enter starting vertex :: ";
 	cin >> i;
 
-	q.push(i); //push starting vertex into queue
+	q.push(i); 
 
-	while(!q.isEmpty()) //Till queue is not empty
+	while(!q.isEmpty()) 
 	{
-		i = q.pop(); //Pop the vertex from queue
+		i = q.pop(); 
 
-		if(visited[i]==1) //ignore if the vertex is visited
+		if(visited[i]==1) 
 			continue;
 
-		cout<<" "<<i; //print the vertex
+		cout<<" "<<i; 
 
-		visited[i] = 1; //set it as visited
+		visited[i] = 1; 
 
-		for (int k = 0; k < n; k++) //for accessing adjacent elements of i
+		for (int k = 0; k < n; k++)
 		{
-			if(adj[i][k] == 1 && visited[k] == 0) //if edge is present and new vertex is not visited
+			if(adj[i][k] == 1 && visited[k] == 0) 
 				q.push(k);
 		}
-	}//while
-}//bfs
+	}
+}
 
 
 int main()
