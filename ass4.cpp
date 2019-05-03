@@ -1,6 +1,4 @@
-/*
-Create inorder threaded binary search tree and perform the traversals 
-*/
+
 #include<iostream>
 using namespace std;
 
@@ -22,12 +20,12 @@ class thread
 		{
 			root=headernode=temp=NULL;
 		}
-	void create();  //Tree creation
-	tbt* createNode(); //Node creation
+	void create();  
+	tbt* createNode(); 
 	void display();
-	void insert(tbt*,tbt*);  //Adding the node level wise(root,temp)
-	void inorder(tbt*,tbt* ); //Non-recursive in-order
-	void preorder(tbt*,tbt* ); //Non-recursive pre-order
+	void insert(tbt*,tbt*);  
+	void inorder(tbt*,tbt* ); 
+	void preorder(tbt*,tbt* ); 
  };
 
 
@@ -43,12 +41,12 @@ tbt * thread::createNode()
 	cin>>tmpNode->data;
 
 	return tmpNode;
-}//end of createNode()
+}
 
 
 
 
-void thread::create()  //Create
+void thread::create() 
 {
 	tbt* temp = createNode();
 	if(root==NULL)
@@ -63,7 +61,7 @@ void thread::create()  //Create
 	}
 	else
 		insert(root,temp);
-}//end of create()
+}
 
 
 
@@ -80,12 +78,11 @@ void thread::display()
 		preorder(root,headernode);
 
 	}
-}//display()
+}
 
 
 
-void thread::insert(tbt *Lroot,tbt *temp)   //Function creates BST and then add node.
-//Paratmeters: Lroot (level wise root) and temp node 
+void thread::insert(tbt *Lroot,tbt *temp)
 {
 	if(temp->data<Lroot->data)//Left Subtree
 	{
@@ -97,8 +94,8 @@ void thread::insert(tbt *Lroot,tbt *temp)   //Function creates BST and then add 
 			Lroot->lbit=0;
 		}
 		else
-			insert(Lroot->left,temp);  //Call to Leftsubtree for adding temp
-	}//end of check for Left Subtree
+			insert(Lroot->left,temp); 
+	}
 
 	if(temp->data>Lroot->data)//Right Subtree
 	{
@@ -112,23 +109,23 @@ void thread::insert(tbt *Lroot,tbt *temp)   //Function creates BST and then add 
 		else
 			insert(Lroot->right,temp);
 	}
-}//insert()
+}
 
 
 void thread :: inorder(tbt *temp,tbt *headernode){
 	while(temp!=headernode)
 	{
-		while(temp->lbit==0) { temp=temp->left; } //Left subtree
-		cout<<"  "<<temp->data;    //Print data
+		while(temp->lbit==0) { temp=temp->left; }
+		cout<<"  "<<temp->data;   
 		while(temp->rbit==1)
 		{
-			temp=temp->right;   		//Threaded right child
+			temp=temp->right;   	
 			if(temp==headernode) return;
 			cout<<"  "<<temp->data;
-		}//inner while(rbit==1)
-		temp=temp->right;     			//Right subtree
-	}//outer while (temp!=head)
-}//inorder()
+		}
+		temp=temp->right;     		
+	}
+}
 
 
 
@@ -136,25 +133,25 @@ void thread :: preorder(tbt *temp,tbt *headernode)
 {
 	while(temp!=headernode)
 	{
-		cout<<"  "<<temp->data;    //Print data
-		while(temp->lbit==0) { temp=temp->left; cout << "  "<<temp->data; } //Left subtree
+		cout<<"  "<<temp->data;  
+		while(temp->lbit==0) { temp=temp->left; cout << "  "<<temp->data; }
 							
 		while(temp->rbit==1)
 		{
-			temp=temp->right;   		//Threaded right child
+			temp=temp->right;   	
 			if(temp==headernode)
 				return;
 		}
-		temp=temp->right;     			//Right subtree
+		temp=temp->right;     	
 	}
-}//preorder()
+}
 
 int main()
 {
    int choice;
    char ch='y';
    int n;
-   thread th;  //object creation
+   thread th; 
    do
    {
             cout<<"\n\t Threaded Binary Tree";
@@ -178,6 +175,6 @@ int main()
    cout<<"\n\n Do you want to continue with main menu?(y/n)";
    cin>>ch;
    }while(ch=='y');
-}//main function
+}
 
 
