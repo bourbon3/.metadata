@@ -9,14 +9,14 @@ class Employee
     char name[50];
     char dsg[50];
     long salary;
-    //char addr[50];
+
 public:
     void setData()
     {
         cout << "\nEnter Employee no. ";
         cin >> empno;
         cout << "\nEnter name of employee ";
-        //cin.getline(name,50);
+       
         cin>>name;
         cout<<"\nEnter the designation of the employee";
         cin>>dsg;
@@ -39,9 +39,6 @@ public:
     }
 };
 
-/*
-* function to write in a binary file.
-*/
 
 void write_record()
 {
@@ -56,9 +53,6 @@ void write_record()
     outFile.close();
 }
 
-/*
-* function to display records of file
-*/
 
 
 void display()
@@ -76,9 +70,6 @@ void display()
     inFile.close();
 }
 
-/*
-* function to search and display from binary file
-*/
 
 void search(int n)
 {
@@ -99,9 +90,6 @@ void search(int n)
     inFile.close();
 }
 
-/*
-* function to delete a record
-*/
 
 void delete_record(int n)
 {
@@ -127,9 +115,6 @@ void delete_record(int n)
     rename("temp.dat", "employee.dat");
 }
 
-/*
-* function to modify a record
-*/
 
 void modify_record(int n)
 {
@@ -164,7 +149,7 @@ int main()
     cin>>ch;
     switch(ch){
 
-    case 1: cout<<"Enter number of records";//Store 4 records in file
+    case 1: cout<<"Enter number of records";
     int n;
     cin>>n;
     for(int i = 0; i <n; i++)
@@ -172,13 +157,13 @@ int main()
     break;
 
     case 2:
-    //Display all records
+  
     cout << "\nList of records";
     display();
     break;
 
 
-    case 3://Search record
+    case 3:
     	cout<<"Enter employee no. to be searched";
     	int s;
     	cin>>s;
@@ -188,13 +173,13 @@ int main()
     	cout<<"enter no to be deleted";
     	int d;
     	cin>>d;
-    //Delete record
+    
     delete_record(d);
     cout << "\nRecord Deleted";
     break;
     case 5:
 
-    //Modify record
+ 
     	cout<<"enter EmpNo to be modified";
     	int m;
     	cin>>m;
