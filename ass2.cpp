@@ -1,22 +1,21 @@
-/*Program to Construct an Expression Tree for a Given Prefix Expression and perform recursive and non-recursive traversals*/
 
 #include<iostream>
 
 using namespace std;
 
-struct TreeNode  //Representing the node template
+struct TreeNode 
 {
 	char data;
 	struct TreeNode *left,*right;
 }*root;
 
-class StackNode  //For stacking the operands and nodes
+class StackNode  
 {    
     public:
         TreeNode *tNode;
-        StackNode *next; //a pointer representing next member of stack
+        StackNode *next; 
         
-        StackNode(TreeNode *tNode)//constructor
+        StackNode(TreeNode *tNode)
         {
             this->tNode = tNode;
             next = NULL;
@@ -28,37 +27,37 @@ class ExpressionTree
     private:
         StackNode *top;
     public:
-        ExpressionTree() //constructor
+        ExpressionTree() 
         {
             top = NULL;
         }
 
-	//function prototypes for tree creation
+	
 	void buildTree(string);
 	void insert(char);
-	//function prototypes for stack operations
+	
         void push(TreeNode *);
 	TreeNode* pop();
-	//function prototypes for tree display
+	
 	void display();
 	void inorder(TreeNode *);
 	void inorder_nonR(TreeNode *);
 	void preorder(TreeNode *);
 	void preorder_nonR(TreeNode *);
 	void postorder(TreeNode *);
-}; //End of class ExpressionTree declaration
+}; 
 
 
 
 void ExpressionTree :: buildTree(string eqn)
 {
-	for ( int i = eqn.length() - 1; i >= 0; i--) //Reserve the string
+	for ( int i = eqn.length() - 1; i >= 0; i--) 
 	{
                 insert(eqn[i]);
 	}
 
 	root = top->tNode;
-}//buildTree
+}
 
 
 void ExpressionTree :: insert(char ch)
@@ -67,9 +66,9 @@ void ExpressionTree :: insert(char ch)
 	temp->left = temp->right = NULL;
 	temp->data = ch;
 
-	if ( ch >='0' && ch <='9')  //is digit-Operand?
+	if ( ch >='0' && ch <='9')  
 		push(temp);
-	else if (ch == '+' || ch == '-' || ch == '*' || ch == '/')//is Operator?
+	else if (ch == '+' || ch == '-' || ch == '*' || ch == '/')/
 	{
 		temp->left = pop();
 		temp->right = pop();
@@ -77,7 +76,7 @@ void ExpressionTree :: insert(char ch)
 	}
 	else { cout<<"Invalid Expression"<<endl; return;}
 	
-}//insert()
+}
 
 void ExpressionTree :: push(TreeNode *ptr)
 {
@@ -85,11 +84,11 @@ void ExpressionTree :: push(TreeNode *ptr)
 		top = new StackNode(ptr);
 	else
 	{
-		StackNode *nptr = new StackNode(ptr); //calls constructor of stack class
+		StackNode *nptr = new StackNode(ptr); 
 		nptr->next = top; 
 		top = nptr;
 	}
-}//Push
+}
 
 TreeNode* ExpressionTree :: pop()
 {
@@ -97,9 +96,9 @@ TreeNode* ExpressionTree :: pop()
 	else {
 		TreeNode *ptr = top->tNode;
 		top = top->next;
-		return ptr;  //we r returning node
+		return ptr;  
 	}
-}//Pop
+}
 
 void ExpressionTree::display()
 {
@@ -114,7 +113,7 @@ void ExpressionTree::display()
 	cout<<"\n Postorder : \t\t";
 	postorder(root);
 	cout<<"\n";
-}//display
+}
 
 void ExpressionTree :: inorder(TreeNode *ptr)
 {
@@ -124,17 +123,7 @@ void ExpressionTree :: inorder(TreeNode *ptr)
                 cout<<"  "<<ptr->data;   
                 inorder(ptr->right);            
             }    
-}//inorder
-
-
-
-
-
-
-
-
-
-
+}
 
 
 void ExpressionTree ::preorder(TreeNode *ptr)
@@ -144,7 +133,7 @@ void ExpressionTree ::preorder(TreeNode *ptr)
                 preorder(ptr->left);                   
                 preorder(ptr->right);            
             }    
-}//preorder
+}
 
 void ExpressionTree ::postorder(TreeNode *ptr)
 {
@@ -153,18 +142,17 @@ void ExpressionTree ::postorder(TreeNode *ptr)
                 postorder(ptr->right);            
 		cout<<"  "<<ptr->data; 
             }    
-}//postorder
-
+}
 void ExpressionTree :: inorder_nonR(TreeNode *temp){
 	top=NULL;
 	while(temp!=NULL || top!=NULL)
 	{
-		while(temp!=NULL) { push(temp); temp=temp->left; } //Left subtree
+		while(temp!=NULL) { push(temp); temp=temp->left; } 
 		temp = pop();
-		cout<<"  "<<temp->data;    //Print data
-		temp=temp->right;     		//Right subtree
-	}//outer while (temp!=NULL)
-}//inorder_nonR()
+		cout<<"  "<<temp->data;    
+		temp=temp->right;     		
+	}
+}
 
 
 void ExpressionTree :: preorder_nonR(TreeNode *temp){
@@ -173,14 +161,14 @@ void ExpressionTree :: preorder_nonR(TreeNode *temp){
 	{
 		while(temp!=NULL) 
 		{ 
-			cout<<"  "<<temp->data;    //Print data
+			cout<<"  "<<temp->data;   
 			push(temp); 
 			temp=temp->left; 
-		} //Left subtree
+		}
 		temp = pop();
-		temp=temp->right;     		//Right subtree
-	}//outer while (temp!=NULL)
-}//inorder_nonR()
+		temp=temp->right;     		
+	}
+}
 
  
 
@@ -197,8 +185,7 @@ int main()
 	cout <<"Traversals:\n";
 	et.display();
 	return 0;
-}//main    
-
+}
 
 
 
