@@ -1,6 +1,4 @@
 
-// Single source shortest Path Algorithm
-// Note - Graph indices start from 1 not 0
 
 #include <iostream>
 #include<string.h>
@@ -18,11 +16,11 @@ class djs
 	void displayGraph();
 	void create();
 	djs() {
-		//initialize cost[][]		
+	
 		for (int i = 1; i <= MAX; i++)
 			for(int j = 1; j <= MAX; j++)
 			cost[i][j]=999;		
-	}//constructor
+	}
 };
 
 void djs :: create()
@@ -31,9 +29,9 @@ void djs :: create()
 	cout<<"No. of Vertices in a graph ::  ";
 	cin>>n;
 
-	for (int i = 1; i< n; i++)//Vertices/Nodes
+	for (int i = 1; i< n; i++)
 	 {
-		for(int j = i+1; j <= n; j++)//Adjacency nodes
+		for(int j = i+1; j <= n; j++)
 		{
 			cout<<"Does edge is present between "<< i <<" and " <<j<<"?(1/0)- ";
 			cin >> ch;
@@ -43,9 +41,9 @@ void djs :: create()
 				cost[i][j] = cost[j][i] = wt;
 			}
 			
-		}//inner for -j
-	}//outer for - i
-}//create
+		}
+	}
+}
 
 void djs::displayGraph(){
 	int i,j;
@@ -59,30 +57,30 @@ void djs::displayGraph(){
 		cout << "\n";
 	}
 
-}//display Graph
+}
 
 void djs:: shortestpath(int s,int t) 
 {
 	int newdist,dist[MAX],processed[MAX],preced[MAX],curr,i,k,dc,smalldist;
-	int p,j=0;  //for path
+	int p,j=0;  
 	int path[MAX];
 
-	for(i=1;i<=n;i++) //initialize
+	for(i=1;i<=n;i++) 
 	{           
 		processed[i]=preced[i]=0;  
-		dist[i]=999;      //initialise distance to infinity
+		dist[i]=999;      
 	}
 
-	processed[s]=1;          //start from source
+	processed[s]=1;         
 	dist[s]=0;
 	curr=s;
 
-	//WHILE LOOP OF SHORTEST PATH STARTS HERE
-	while(curr!=t) {       //till not at destination
+	
+	while(curr!=t) {       
 		smalldist=999;
-		dc=dist[curr];  //distance of current node-dc
+		dc=dist[curr]; 
 
-		for(i=1;i<=n;i++) //scan all vertices for finding shortest distance from curr
+		for(i=1;i<=n;i++) 
 		{
 			if(processed[i]==0){
 				newdist=dc+cost[curr][i]; 
@@ -95,14 +93,14 @@ void djs:: shortestpath(int s,int t)
 					smalldist=dist[i];
 					k=i;
 				}
-			}//end of if not processed
-		}//end of for
+			}
+		}
 
 		curr=k;
 		processed[curr]=1;
-	}//end of while loop of shortest path ENDS HERE
+	}
 
-	//FRAME THE PATH OF SHORTEST DISTANCE FROM SOURCE TO DESTINATION
+	
 	p = t;
 	path[j++] = p;
 	while (p != s)
@@ -122,7 +120,7 @@ void djs:: shortestpath(int s,int t)
 
 int main(){
 	int s,t;
-	djs obj;  //constructor will be called and initialization are made
+	djs obj;  
 	obj.create();
 	obj.displayGraph();
 	cout << "\n Enter start and target vertices: ";
