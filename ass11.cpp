@@ -1,6 +1,3 @@
-/*
-Consider telephone book database of N clients. Make use of a hash table implementation to quickly look up client‘s telephone number
-*/
 
 #include <iostream>
 #include <iomanip>
@@ -18,7 +15,7 @@ public:
 private:
 	string name;
 	string phone;
-	string flag;	//EMPTY, OCCUPIED
+	string flag;	
 	friend class PhoneBook;
 };
 
@@ -42,7 +39,7 @@ void PhoneBook::insertRecord(Record table[]) {
 		Record r;
 		cin.ignore();
 		cout << "Enter name: \n";
-		getline(cin, r.name);	//to take space in name
+		getline(cin, r.name);	
 		cout << "Enter phone number: \n";
 		cin >> r.phone;
 
@@ -53,7 +50,7 @@ void PhoneBook::insertRecord(Record table[]) {
 				cout << "NOT INSERTED...same name is already present\n";
 				return;
 			}
-			hashIndex = (++hashIndex % SIZE);//% to make sure array index not exceed SIZE
+			hashIndex = (++hashIndex % SIZE);
 		}
 
 		table[hashIndex] = r;
@@ -91,8 +88,8 @@ void PhoneBook::searchRecord(Record table[]) {
 				hashIndex = (++hashIndex % SIZE);
 				++count;
 		}
-	}//while
-	cout << "Name is not present" << endl;//3 names with SIZE=20 and name not present
+	}
+	cout << "Name is not present" << endl;
 }
 
 int PhoneBook::getHashCode(string key) {
